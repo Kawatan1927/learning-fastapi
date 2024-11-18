@@ -13,8 +13,21 @@ fake_items_db = {
 }
 
 fake_user_db = {
-    "alice": {"username": "alice", "email": "alice@example.com", "full_name": "Alice Wonderland"},
-    "bob": {"username": "bob", "email": "bob@example.com", "full_name": "Bob Builder"}
+    "alice": {
+        "username": "alice",
+        "email": "alice@example.com",
+        "full_name": "Alice Wonderland",
+        "address": [
+            {"street": "Wonderland", "city": "New York", "zipcode": "10001"},
+            {"street": "Mars", "city": "Mars", "zipcode": "00000"}
+        ]
+    },
+    "bob": {
+        "username": "bob",
+        "email": "bob@example.com",
+        "full_name": "Bob Builder",
+        "address": []
+    },
 }
 
 
