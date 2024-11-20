@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, status, Query, Path
+from fastapi import APIRouter, HTTPException, status
 
 from app.models import Item, User
 
@@ -32,7 +32,7 @@ fake_user_db = {
 
 
 @router.get("/", response_model=List[Item])
-def read_items(skip: int = 0, limit: int = 10, min_price: Optional[float] = Query(None, ge=0), max_price: Optional[float] = Query(None, ge=0)):
+def read_items(skip: int = 0, limit: int = 10, min_price: Optional[float] = None, max_price: Optional[float] = None):
     items = list(fake_items_db.values())[skip: skip + limit]
     if min_price is not None:
         items = [item for item in items if item["price"] >= min_price]
@@ -42,7 +42,7 @@ def read_items(skip: int = 0, limit: int = 10, min_price: Optional[float] = Quer
 
 
 @router.get("/{item_id}", response_model=Item)
-def read_item(item_id: int = Path(..., ge=1), q: Optional[str] = None):
+def read_item(item_id: int, q: Optional[str] = None):
     if item_id not in fake_items_db:
         raise HTTPException(status_code=404, detail="Item not found")
     item = fake_items_db[item_id]
